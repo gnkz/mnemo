@@ -26,7 +26,7 @@ func main() {
 	}
 
     // Generate the mnemonic using the entropy and the english set of words
-	mnemonic, err := mnemo.New(ent, en.New())
+	mnemonic, err := mnemo.NewFromEntropy(ent, en.New())
 	if err != nil {
 		panic(err)
 	}
