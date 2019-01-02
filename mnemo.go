@@ -1,5 +1,4 @@
 // Package mnemo is an implementation of the Bip-39 mnemonic code generation scheme.
-//
 // A mnemonic code is a set of words that are used to generate seeds to create HD wallets.
 package mnemo
 
