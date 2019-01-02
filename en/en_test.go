@@ -64,7 +64,7 @@ func TestMnemonic(t *testing.T) {
 
 	for _, cc := range cases {
 		input, _ := hex.DecodeString(cc.input)
-		result, err := mnemo.NewFromEntropy(input, en.New())
+		result, err := mnemo.New(input, en.New())
 
 		if err != cc.err {
 			t.Fatalf("Expected error %v but got %v\n", cc.err, err)

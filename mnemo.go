@@ -4,62 +4,12 @@
 package mnemo
 
 import (
-	"errors"
 	"math/big"
 	"strings"
 )
 
-// MnemonicLength represents the number of words to include
-// in the mnemonic
-type MnemonicLength int
-
-const (
-	// Words12 represents a 12 words mnemonic
-	Words12 MnemonicLength = 12 + (3 * iota)
-
-	// Words15 represents a 15 words mnemonic
-	Words15
-
-	// Words18 represents a 18 words mnemonic
-	Words18
-
-	// Words21 represents a 21 words mnemonic
-	Words21
-
-	// Words24 represents a 24 words mnemonic
-	Words24
-)
-
-// New generates a random mnemonic of a determined length using words from
-// a Dictionary
-func New(length MnemonicLength, dict Dictionary) (string, error) {
-	var entLen EntropyLength
-
-	switch length {
-	case Words12:
-		entLen = Entropy128
-	case Words15:
-		entLen = Entropy160
-	case Words18:
-		entLen = Entropy192
-	case Words21:
-		entLen = Entropy224
-	case Words24:
-		entLen = Entropy256
-	default:
-		return "", errors.New("Invalid mnemonic length")
-	}
-
-	ent, err := Entropy(entLen)
-	if err != nil {
-		return "", err
-	}
-
-	return NewFromEntropy(ent, dict)
-}
-
-// NewFromEntropy creates a new mnemonic using a valid entropy and a Dictionary
-func NewFromEntropy(entropy []byte, dict Dictionary) (string, error) {
+// New creates a new mnemonic using a valid entropy and a Dictionary
+func New(entropy []byte, dict Dictionary) (string, error) {
 	cs, csLen, err := Checksum(entropy)
 	if err != nil {
 		return "", err
